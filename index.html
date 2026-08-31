@@ -15,7 +15,7 @@
 <body>
 
 <header class="topbar">
-  <div class="brand">
+  <button class="brand" id="home-btn" aria-label="Go to home">
     <div class="mark">
       <svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="115" fill="#FF5A1F"/><path d="M 148 258 Q 256 352 364 258" fill="none" stroke="#14140F" stroke-width="34" stroke-linecap="round"/><path d="M 386 118 L 392 140 L 414 146 L 392 152 L 386 174 L 380 152 L 358 146 L 380 140 Z" fill="#16C172"/></svg>
     </div>
@@ -23,67 +23,78 @@
       <span class="name">Now<em>What</em></span>
       <span class="tag">SOMETHING TO DO, RIGHT NOW</span>
     </div>
-  </div>
+  </button>
 </header>
 
 <main>
-  <section class="hero">
-    <h1>Do something <span class="accent-green">good</span> with the next few minutes.</h1>
-    <p class="lede">Tell us how you're feeling and how much time you've got — we'll hand you one thing to do. Not ten. One.</p>
-  </section>
+  <div id="home-view">
+    <section class="hero">
+      <h1>Do something <span class="accent-green">good</span> with the next few minutes.</h1>
+      <p class="lede">Tell us how you're feeling and how much time you've got — we'll hand you one thing to do. Not ten. One.</p>
+    </section>
 
-  <section class="filters" aria-label="How you're feeling right now">
-    <div class="filter-line">
-      <span class="filter-label">Mood</span>
-      <div class="filter-row" id="mood-row"></div>
-    </div>
-    <div class="filter-line">
-      <span class="filter-label">Energy</span>
-      <div class="filter-row" id="energy-row"></div>
-    </div>
-    <div class="filter-line">
-      <span class="filter-label">Time you have</span>
-      <div class="filter-row" id="time-row"></div>
-    </div>
-  </section>
+    <section class="filters" aria-label="How you're feeling right now">
+      <div class="filter-line">
+        <span class="filter-label">Mood</span>
+        <div class="filter-row" id="mood-row"></div>
+      </div>
+      <div class="filter-line">
+        <span class="filter-label">Energy</span>
+        <div class="filter-row" id="energy-row"></div>
+      </div>
+      <div class="filter-line">
+        <span class="filter-label">Time you have</span>
+        <div class="filter-row" id="time-row"></div>
+      </div>
+    </section>
 
-  <button class="cta" id="find-btn">
-    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M13 3a1 1 0 0 1 1 1v6h6a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-6v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-6H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h6V4a1 1 0 0 1 1-1z"/></svg>
-    Find something to do
-  </button>
-
-  <section class="result" id="result" hidden>
-    <span class="mode-tag" id="mode-tag">rest</span>
-    <h2 id="headline">Take a slow shower</h2>
-    <p id="why">Low energy and a short window — something restorative beats something demanding.</p>
-    <div class="result-actions">
-      <button class="do-it" id="do-it">I'll do it</button>
-      <button class="swap" id="swap">Something else</button>
-    </div>
-  </section>
-
-  <section class="option-cards">
-    <button class="option-card" id="surprise-card">
-      <span class="option-icon">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2a1 1 0 0 1 1 1v1.06a8 8 0 0 1 6.94 6.94H21a1 1 0 1 1 0 2h-1.06A8 8 0 0 1 13 19.94V21a1 1 0 1 1-2 0v-1.06A8 8 0 0 1 4.06 13H3a1 1 0 1 1 0-2h1.06A8 8 0 0 1 11 4.06V3a1 1 0 0 1 1-1zm0 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>
-      </span>
-      <span class="option-text">
-        <strong>Surprise me</strong>
-        <small>Skip the filters — pick something for me right now.</small>
-      </span>
+    <button class="cta" id="find-btn">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M13 3a1 1 0 0 1 1 1v6h6a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-6v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-6H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h6V4a1 1 0 0 1 1-1z"/></svg>
+      Find something to do
     </button>
-    <button class="option-card" id="browse-card">
-      <span class="option-icon">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 5a2 2 0 0 1 2-2h5v18H5a2 2 0 0 1-2-2V5zm12-2h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4V3z"/></svg>
-      </span>
-      <span class="option-text">
-        <strong>Browse by mood</strong>
-        <small>See every idea, sorted by what it takes to do it.</small>
-      </span>
-    </button>
-  </section>
 
-  <section class="browse" id="browse" hidden></section>
+    <section class="result" id="result" hidden>
+      <span class="mode-tag" id="mode-tag">rest</span>
+      <h2 id="headline">Take a slow shower</h2>
+      <p id="why">Low energy and a short window — something restorative beats something demanding.</p>
+      <div class="result-actions">
+        <button class="do-it" id="do-it">I'll do it</button>
+        <button class="swap" id="swap">Something else</button>
+      </div>
+    </section>
+
+    <section class="option-cards">
+      <button class="option-card" id="surprise-card">
+        <span class="option-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2a1 1 0 0 1 1 1v1.06a8 8 0 0 1 6.94 6.94H21a1 1 0 1 1 0 2h-1.06A8 8 0 0 1 13 19.94V21a1 1 0 1 1-2 0v-1.06A8 8 0 0 1 4.06 13H3a1 1 0 1 1 0-2h1.06A8 8 0 0 1 11 4.06V3a1 1 0 0 1 1-1zm0 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>
+        </span>
+        <span class="option-text">
+          <strong>Surprise me</strong>
+          <small>Skip the filters — pick something for me right now.</small>
+        </span>
+      </button>
+      <button class="option-card" id="browse-card">
+        <span class="option-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 5a2 2 0 0 1 2-2h5v18H5a2 2 0 0 1-2-2V5zm12-2h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4V3z"/></svg>
+        </span>
+        <span class="option-text">
+          <strong>Browse by mood</strong>
+          <small>See every idea, sorted by what it takes to do it.</small>
+        </span>
+      </button>
+    </section>
+  </div>
+
+  <div id="browse-view" hidden>
+    <div class="browse-header">
+      <button class="back-btn" id="back-btn" aria-label="Back to home">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/></svg>
+        Back
+      </button>
+      <h2>Browse every idea</h2>
+    </div>
+    <section class="browse" id="browse"></section>
+  </div>
 </main>
 
 <script src="app.js"></script>

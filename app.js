@@ -81,6 +81,18 @@ function suggestRandom() {
   showResult(pick);
 }
 
+function showHome() {
+  document.getElementById("home-view").hidden = false;
+  document.getElementById("browse-view").hidden = true;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function showBrowsePage() {
+  document.getElementById("home-view").hidden = true;
+  document.getElementById("browse-view").hidden = false;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 function renderBrowse() {
   const browse = document.getElementById("browse");
   browse.innerHTML = "";
@@ -107,16 +119,15 @@ function renderBrowse() {
       item.className = "browse-item";
       item.type = "button";
       item.innerHTML = `<div class="b-head">${a.headline}</div><div class="b-why">${a.why}</div>`;
-      item.onclick = () => showResult(a);
+      item.onclick = () => {
+        showHome();
+        showResult(a);
+      };
       list.appendChild(item);
     });
     section.appendChild(list);
     browse.appendChild(section);
   });
-
-  browse.hidden = false;
-  document.getElementById("result").hidden = true;
-  browse.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 document.getElementById("find-btn").onclick = () => suggestFromFilters(true);
@@ -127,6 +138,11 @@ document.getElementById("do-it").onclick = () => {
   setTimeout(() => { btn.textContent = "I'll do it"; }, 1800);
 };
 document.getElementById("surprise-card").onclick = () => suggestRandom();
-document.getElementById("browse-card").onclick = () => renderBrowse();
+document.getElementById("browse-card").onclick = () => {
+  renderBrowse();
+  showBrowsePage();
+};
+document.getElementById("home-btn").onclick = () => showHome();
+document.getElementById("back-btn").onclick = () => showHome();
 
 renderChips();
