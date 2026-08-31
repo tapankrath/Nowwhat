@@ -84,17 +84,36 @@ function suggestRandom() {
 function renderBrowse() {
   const browse = document.getElementById("browse");
   browse.innerHTML = "";
+
+  const groups = {};
   activities.forEach((a) => {
-    const item = document.createElement("button");
-    item.className = "browse-item";
-    item.style.width = "100%";
-    item.style.textAlign = "left";
-    item.style.border = "1.5px solid var(--line)";
-    item.style.cursor = "pointer";
-    item.innerHTML = `<div class="b-mode">${modeLabels[a.mode]}</div><div class="b-head">${a.headline}</div><div class="b-why">${a.why}</div>`;
-    item.onclick = () => showResult(a);
-    browse.appendChild(item);
+    if (!groups[a.mode]) groups[a.mode] = [];
+    groups[a.mode].push(a);
   });
+
+  Object.keys(groups).forEach((mode) => {
+    const section = document.createElement("div");
+    section.className = "browse-group";
+
+    const header = document.createElement("div");
+    header.className = "browse-group-header";
+    header.textContent = modeLabels[mode];
+    section.appendChild(header);
+
+    const list = document.createElement("div");
+    list.className = "browse-list";
+    groups[mode].forEach((a) => {
+      const item = document.createElement("button");
+      item.className = "browse-item";
+      item.type = "button";
+      item.innerHTML = `<div class="b-head">${a.headline}</div><div class="b-why">${a.why}</div>`;
+      item.onclick = () => showResult(a);
+      list.appendChild(item);
+    });
+    section.appendChild(list);
+    browse.appendChild(section);
+  });
+
   browse.hidden = false;
   document.getElementById("result").hidden = true;
   browse.scrollIntoView({ behavior: "smooth", block: "start" });
