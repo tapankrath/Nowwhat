@@ -239,6 +239,14 @@ main {
   border: 1.5px solid var(--line);
 }
 
+.section-divider {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray);
+  margin: 22px 0 14px;
+}
+
 .option-cards {
   margin-top: 24px;
   display: flex;
