@@ -151,15 +151,16 @@ function showResult(pick) {
   document.getElementById("headline").textContent = pick.headline;
   document.getElementById("why").textContent = pick.why;
 
+  const nearbyWrap = document.getElementById("nearby-wrap");
   const nearbyBtn = document.getElementById("nearby-btn");
   if (pick.nearby) {
-    nearbyBtn.hidden = false;
+    nearbyWrap.hidden = false;
     nearbyBtn.onclick = () => {
       const url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(pick.nearby + " near me");
       window.open(url, "_blank");
     };
   } else {
-    nearbyBtn.hidden = true;
+    nearbyWrap.hidden = true;
   }
 
   const result = document.getElementById("result");
