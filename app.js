@@ -304,7 +304,8 @@ function switchMode(mode) {
     document.getElementById("browse-card-sub").textContent = "See every idea, sorted by what it takes to do it.";
     document.getElementById("browse-title").textContent = "Browse every idea";
     document.getElementById("situations-card").hidden = false;
-    document.getElementById("situations-card").textContent = "Something specific going on instead?";
+    document.getElementById("situations-card-title").textContent = "Something specific is going on";
+    document.getElementById("situations-card-sub").textContent = "Skip the filters — tell us the situation.";
     document.getElementById("situations-title").textContent = "What's going on?";
   } else {
     document.getElementById("hero-h1").innerHTML = 'Something good just happened? <span class="accent-green">Celebrate it, quick.</span>';
@@ -317,7 +318,8 @@ function switchMode(mode) {
     document.getElementById("browse-card-sub").textContent = "See every way to celebrate, sorted by what it takes to do it.";
     document.getElementById("browse-title").textContent = "Browse every way to celebrate";
     document.getElementById("situations-card").hidden = false;
-    document.getElementById("situations-card").textContent = "Something more specific to mark?";
+    document.getElementById("situations-card-title").textContent = "Something specific to mark";
+    document.getElementById("situations-card-sub").textContent = "Skip the filters — tell us the occasion.";
     document.getElementById("situations-title").textContent = "What's the occasion?";
   }
 
