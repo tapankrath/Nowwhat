@@ -62,14 +62,18 @@ const situations = [
   { id: "cantsleep", label: "Can't sleep", mode: "winddown", headline: "Put your phone in another room and read on paper", why: "The light and the scrolling are both working against you right now." },
   { id: "anxious", label: "Anxious about something coming up", mode: "reset", headline: "Write down the next concrete step, nothing else", why: "You don't need the whole plan right now, just the next honest move." },
   { id: "hardconvo", label: "Just had a hard conversation", mode: "process", headline: "Write out what you'd say, even if you never send it", why: "Getting it out of your head does real work, even unsent." },
-  { id: "goodnews", label: "Got good news, want to mark it", mode: "connect", headline: "Tell someone who'll be as happy as you are", why: "Good news is better shared than scrolled past." },
   { id: "killingtime", label: "Killing time somewhere", mode: "learn", headline: "Read one thing you bookmarked and forgot about", why: "You already meant to read it. Now's as good a time as any." },
   { id: "startday", label: "Starting the day", mode: "focus", headline: "Pick the one task that'll make today feel done", why: "Do just that first, before anything else gets a vote." },
   { id: "endday", label: "Ending the day", mode: "winddown", headline: "Write down three things from today, good or bad", why: "Closes the day out instead of leaving it open in your head." },
   { id: "missingsomeone", label: "Missing someone", mode: "connect", headline: "Send them a message, even just a photo that reminded you of them", why: "It doesn't need to be a big message. Small counts." },
   { id: "doomscrolling", label: "Doomscrolling or comparing myself", mode: "reset", headline: "Close the app and put your phone in another room", why: "The scroll isn't going to resolve itself. Distance does more than willpower here." },
-  { id: "cantstart", label: "Can't get started on something", mode: "focus", headline: "Set a timer for five minutes and do just the smallest piece", why: "You're not committing to finishing it. Just to five minutes." },
-  { id: "finishedbig", label: "Just finished something big", mode: "give", headline: "Tell someone who'll actually be proud of you", why: "Let it land with someone before you move on to the next thing." }
+  { id: "cantstart", label: "Can't get started on something", mode: "focus", headline: "Set a timer for five minutes and do just the smallest piece", why: "You're not committing to finishing it. Just to five minutes." }
+];
+
+const celebrateSituations = [
+  { id: "goodnews", label: "Got good news, want to mark it", mode: "connect", headline: "Tell someone who'll be as happy as you are", why: "Good news is better shared than scrolled past." },
+  { id: "finishedbig", label: "Just finished something big", mode: "give", headline: "Tell someone who'll actually be proud of you", why: "Let it land with someone before you move on to the next thing." },
+  { id: "niceword", label: "Someone said something nice about you", mode: "mark", headline: "Write it down somewhere you'll actually see it again", why: "Let it stick around a little longer than the moment did." }
 ];
 
 let appMode = "lift";
@@ -269,7 +273,8 @@ function showSituationsPage() {
 function renderSituations() {
   const list = document.getElementById("situation-list");
   list.innerHTML = "";
-  situations.forEach((s) => {
+  const pool = appMode === "lift" ? situations : celebrateSituations;
+  pool.forEach((s) => {
     const item = document.createElement("button");
     item.className = "situation-item";
     item.type = "button";
@@ -299,6 +304,8 @@ function switchMode(mode) {
     document.getElementById("browse-card-sub").textContent = "See every idea, sorted by what it takes to do it.";
     document.getElementById("browse-title").textContent = "Browse every idea";
     document.getElementById("situations-card").hidden = false;
+    document.getElementById("situations-card").textContent = "Something specific going on instead?";
+    document.getElementById("situations-title").textContent = "What's going on?";
   } else {
     document.getElementById("hero-h1").innerHTML = 'Something good just happened? <span class="accent-green">Celebrate it, quick.</span>';
     document.getElementById("hero-lede").textContent = "Tell us how big it is and who's around — we'll hand you one way to mark it. Not ten. One.";
@@ -309,7 +316,9 @@ function switchMode(mode) {
     document.getElementById("browse-card-title").textContent = "Browse by vibe";
     document.getElementById("browse-card-sub").textContent = "See every way to celebrate, sorted by what it takes to do it.";
     document.getElementById("browse-title").textContent = "Browse every way to celebrate";
-    document.getElementById("situations-card").hidden = true;
+    document.getElementById("situations-card").hidden = false;
+    document.getElementById("situations-card").textContent = "Something more specific to mark?";
+    document.getElementById("situations-title").textContent = "What's the occasion?";
   }
 
   renderChips();
