@@ -326,39 +326,45 @@ function switchMode(mode) {
   renderChips();
 }
 
-document.getElementById("find-btn").onclick = () => {
+function on(id, fn) {
+  const el = document.getElementById(id);
+  if (el) el.onclick = fn;
+}
+
+renderChips();
+
+on("find-btn", () => {
   if (appMode === "lift") suggestFromFilters(true);
   else suggestCelebrate(true);
-};
-document.getElementById("swap").onclick = () => {
+});
+on("swap", () => {
   if (appMode === "lift") suggestFromFilters(false);
   else suggestCelebrate(false);
-};
-document.getElementById("do-it").onclick = () => {
+});
+on("do-it", () => {
   const btn = document.getElementById("do-it");
   btn.textContent = "Nice.";
   setTimeout(() => { btn.textContent = "I'll do it"; }, 1800);
-};
-document.getElementById("surprise-card").onclick = () => suggestRandom();
-document.getElementById("browse-card").onclick = () => {
+});
+on("surprise-card", () => suggestRandom());
+on("browse-card", () => {
   if (appMode === "lift") renderBrowse();
   else renderCelebrateBrowse();
   showBrowsePage();
-};
-document.getElementById("home-btn").onclick = () => showHome();
-document.getElementById("back-btn").onclick = () => showHome();
-document.getElementById("situations-card").onclick = () => {
+});
+on("home-btn", () => showHome());
+on("back-btn", () => showHome());
+on("situations-card", () => {
   renderSituations();
   showSituationsPage();
-};
-document.getElementById("situations-back-btn").onclick = () => showHome();
-document.getElementById("mode-lift-tab").onclick = () => switchMode("lift");
-document.getElementById("mode-celebrate-tab").onclick = () => switchMode("celebrate");
-document.getElementById("pick-for-me-btn").onclick = () => {
+});
+on("situations-back-btn", () => showHome());
+on("mode-lift-tab", () => switchMode("lift"));
+on("mode-celebrate-tab", () => switchMode("celebrate"));
+on("pick-for-me-btn", () => {
   const cards = document.getElementById("option-cards");
+  if (!cards) return;
   cards.scrollIntoView({ behavior: "smooth", block: "center" });
   cards.classList.add("pulse");
   setTimeout(() => cards.classList.remove("pulse"), 900);
-};
-
-renderChips();
+});
