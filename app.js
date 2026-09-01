@@ -109,8 +109,10 @@ function showResult(pick) {
 
 function suggestFromFilters(reset) {
   if (reset) shown = [];
-  const ranked = activities.slice().sort((a, b) => score(b) - score(a));
-  showResult(ranked[0]);
+  const scored = activities.map((a) => ({ a, s: score(a) }));
+  const max = Math.max(...scored.map((x) => x.s));
+  const top = scored.filter((x) => x.s === max).map((x) => x.a);
+  showResult(top[Math.floor(Math.random() * top.length)]);
 }
 
 function suggestRandom() {
