@@ -155,6 +155,7 @@ function showResult(pick) {
   const nearbyBtn = document.getElementById("nearby-btn");
   if (pick.nearby) {
     nearbyWrap.hidden = false;
+    document.getElementById("nearby-btn-label").textContent = `Find ${pick.nearby} near me`;
     nearbyBtn.onclick = () => {
       const url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(pick.nearby + " near me");
       window.open(url, "_blank");
