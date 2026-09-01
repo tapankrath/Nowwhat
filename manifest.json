@@ -1,6 +1,6 @@
 {
-  "name": "NowWhat",
-  "short_name": "NowWhat",
+  "name": "PickSomethingNow",
+  "short_name": "PickSomethingNow",
   "description": "Something good to do, right now.",
   "start_url": "./index.html",
   "display": "standalone",
