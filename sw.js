@@ -1,4 +1,4 @@
-const CACHE = "nowwhat-v5";
+const CACHE = "nowwhat-v6";
 const FILES = [
   "./",
   "./index.html",

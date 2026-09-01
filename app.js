@@ -21,10 +21,18 @@ const activities = [
   { mode: "winddown", headline: "Put your phone in another room and read on paper", why: "The light and the scrolling are both working against you right now.", mood: ["low", "ok"], energy: ["low"], time: ["20"] },
   { mode: "winddown", headline: "Write down three things from today, good or bad", why: "Closes the day out instead of leaving it open in your head.", mood: ["low", "ok", "good"], energy: ["low"], time: ["5"] },
   { mode: "process", headline: "Write out what you'd say, even if you never send it", why: "Getting it out of your head and onto a page does real work, even unsent.", mood: ["low"], energy: ["low", "mid"], time: ["20"] },
-  { mode: "process", headline: "Call the one person who'll actually get it", why: "Not everyone — just the one. That's usually enough.", mood: ["low"], energy: ["mid"], time: ["20", "60"] }
+  { mode: "process", headline: "Call the one person who'll actually get it", why: "Not everyone — just the one. That's usually enough.", mood: ["low"], energy: ["mid"], time: ["20", "60"] },
+  { mode: "nourish", headline: "Make yourself something to eat, slowly", why: "Not while doing five other things — just the food, for a few minutes.", mood: ["low", "ok"], energy: ["low", "mid"], time: ["20"] },
+  { mode: "nourish", headline: "Get a glass of water and actually drink it", why: "Small, boring, and it works more often than it gets credit for.", mood: ["low", "ok", "good"], energy: ["low"], time: ["5"] },
+  { mode: "give", headline: "Send a genuine compliment to someone", why: "Costs you nothing and it's rare enough to land.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5"] },
+  { mode: "give", headline: "Leave a good review for a place you liked", why: "Two minutes, and it actually helps a small business.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5", "20"] },
+  { mode: "explore", headline: "Take a different route than usual", why: "Same walk, new scenery. Small novelty goes further than it should.", mood: ["ok", "good"], energy: ["mid", "high"], time: ["20", "60"] },
+  { mode: "explore", headline: "Try a genre of music you never listen to", why: "Ten minutes of something unfamiliar resets your ear a bit.", mood: ["low", "ok", "good"], energy: ["low", "mid"], time: ["5", "20"] },
+  { mode: "clear", headline: "Reply to the one email you've been avoiding", why: "It's smaller than it feels. Clearing it frees up more headspace than the task itself.", mood: ["ok", "good"], energy: ["mid"], time: ["5", "20"] },
+  { mode: "clear", headline: "Pay the bill or fill the form you've been putting off", why: "Boring, quick, and it stops living rent-free in your head.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5", "20"] }
 ];
 
-const modeLabels = { move: "move", rest: "rest", connect: "connect", create: "create", play: "play", learn: "learn", reflect: "reflect", reset: "reset", focus: "focus", winddown: "wind down", process: "process" };
+const modeLabels = { move: "move", rest: "rest", connect: "connect", create: "create", play: "play", learn: "learn", reflect: "reflect", reset: "reset", focus: "focus", winddown: "wind down", process: "process", nourish: "nourish", give: "give", explore: "explore", clear: "clear" };
 
 const situations = [
   { id: "bored", label: "Bored or restless", mode: "play", headline: "Put on a song and actually listen", why: "Three minutes, no multitasking. Small enough to just do." },
@@ -35,7 +43,11 @@ const situations = [
   { id: "goodnews", label: "Got good news, want to mark it", mode: "connect", headline: "Tell someone who'll be as happy as you are", why: "Good news is better shared than scrolled past." },
   { id: "killingtime", label: "Killing time somewhere", mode: "learn", headline: "Read one thing you bookmarked and forgot about", why: "You already meant to read it. Now's as good a time as any." },
   { id: "startday", label: "Starting the day", mode: "focus", headline: "Pick the one task that'll make today feel done", why: "Do just that first, before anything else gets a vote." },
-  { id: "endday", label: "Ending the day", mode: "winddown", headline: "Write down three things from today, good or bad", why: "Closes the day out instead of leaving it open in your head." }
+  { id: "endday", label: "Ending the day", mode: "winddown", headline: "Write down three things from today, good or bad", why: "Closes the day out instead of leaving it open in your head." },
+  { id: "missingsomeone", label: "Missing someone", mode: "connect", headline: "Send them a message, even just a photo that reminded you of them", why: "It doesn't need to be a big message. Small counts." },
+  { id: "doomscrolling", label: "Doomscrolling or comparing myself", mode: "reset", headline: "Close the app and put your phone in another room", why: "The scroll isn't going to resolve itself. Distance does more than willpower here." },
+  { id: "cantstart", label: "Can't get started on something", mode: "focus", headline: "Set a timer for five minutes and do just the smallest piece", why: "You're not committing to finishing it. Just to five minutes." },
+  { id: "finishedbig", label: "Just finished something big", mode: "give", headline: "Tell someone who'll actually be proud of you", why: "Let it land with someone before you move on to the next thing." }
 ];
 
 let state = { mood: "ok", energy: "mid", time: "20" };
