@@ -33,6 +33,41 @@
       <p class="lede">Tell us how you're feeling and how much time you've got — we'll hand you one thing to do. Not ten. One.</p>
     </section>
 
+    <section class="filters" aria-label="How you're feeling right now">
+      <div class="filter-line">
+        <span class="filter-label">Mood</span>
+        <div class="filter-row" id="mood-row"></div>
+      </div>
+      <div class="filter-line">
+        <span class="filter-label">Energy</span>
+        <div class="filter-row" id="energy-row"></div>
+      </div>
+      <div class="filter-line">
+        <span class="filter-label">Time you have</span>
+        <div class="filter-row" id="time-row"></div>
+      </div>
+      <button class="specific-link" id="situations-card">
+        Something specific going on instead?
+      </button>
+    </section>
+
+    <button class="cta" id="find-btn">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M13 3a1 1 0 0 1 1 1v6h6a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-6v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-6H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h6V4a1 1 0 0 1 1-1z"/></svg>
+      Find something to do
+    </button>
+
+    <section class="result" id="result" hidden>
+      <span class="mode-tag" id="mode-tag">rest</span>
+      <h2 id="headline">Take a slow shower</h2>
+      <p id="why">Low energy and a short window — something restorative beats something demanding.</p>
+      <div class="result-actions">
+        <button class="do-it" id="do-it">I'll do it</button>
+        <button class="swap" id="swap">Something else</button>
+      </div>
+    </section>
+
+    <p class="section-divider">Or, let us pick</p>
+
     <section class="option-cards">
       <button class="option-card" id="surprise-card">
         <span class="option-icon">
@@ -52,47 +87,6 @@
           <small>See every idea, sorted by what it takes to do it.</small>
         </span>
       </button>
-      <button class="option-card" id="situations-card">
-        <span class="option-icon">
-          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-        </span>
-        <span class="option-text">
-          <strong>Something specific is going on</strong>
-          <small>Skip the filters — tell us the situation.</small>
-        </span>
-      </button>
-    </section>
-
-    <p class="section-divider">Or set it up yourself</p>
-
-    <section class="filters" aria-label="How you're feeling right now">
-      <div class="filter-line">
-        <span class="filter-label">Mood</span>
-        <div class="filter-row" id="mood-row"></div>
-      </div>
-      <div class="filter-line">
-        <span class="filter-label">Energy</span>
-        <div class="filter-row" id="energy-row"></div>
-      </div>
-      <div class="filter-line">
-        <span class="filter-label">Time you have</span>
-        <div class="filter-row" id="time-row"></div>
-      </div>
-    </section>
-
-    <button class="cta" id="find-btn">
-      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M13 3a1 1 0 0 1 1 1v6h6a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-6v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-6H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h6V4a1 1 0 0 1 1-1z"/></svg>
-      Find something to do
-    </button>
-
-    <section class="result" id="result" hidden>
-      <span class="mode-tag" id="mode-tag">rest</span>
-      <h2 id="headline">Take a slow shower</h2>
-      <p id="why">Low energy and a short window — something restorative beats something demanding.</p>
-      <div class="result-actions">
-        <button class="do-it" id="do-it">I'll do it</button>
-        <button class="swap" id="swap">Something else</button>
-      </div>
     </section>
   </div>
 

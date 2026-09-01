@@ -70,11 +70,16 @@ function renderChips() {
   });
 }
 
-function score(a) {
+function matchScore(a) {
   let s = 0;
   if (a.mood.includes(state.mood)) s += 2;
   if (a.energy.includes(state.energy)) s += 2;
   if (a.time.includes(state.time)) s += 2;
+  return s;
+}
+
+function score(a) {
+  let s = matchScore(a);
   if (shown.includes(a.headline)) s -= 5;
   return s;
 }
@@ -125,7 +130,12 @@ function renderBrowse() {
     groups[a.mode].push(a);
   });
 
-  Object.keys(groups).forEach((mode) => {
+  const modeOrder = Object.keys(groups).sort((m1, m2) => {
+    const best = (m) => Math.max(...groups[m].map(matchScore));
+    return best(m2) - best(m1);
+  });
+
+  modeOrder.forEach((mode) => {
     const section = document.createElement("div");
     section.className = "browse-group";
 
@@ -136,17 +146,20 @@ function renderBrowse() {
 
     const list = document.createElement("div");
     list.className = "browse-list";
-    groups[mode].forEach((a) => {
-      const item = document.createElement("button");
-      item.className = "browse-item";
-      item.type = "button";
-      item.innerHTML = `<div class="b-head">${a.headline}</div><div class="b-why">${a.why}</div>`;
-      item.onclick = () => {
-        showHome();
-        showResult(a);
-      };
-      list.appendChild(item);
-    });
+    groups[mode]
+      .slice()
+      .sort((a, b) => matchScore(b) - matchScore(a))
+      .forEach((a) => {
+        const item = document.createElement("button");
+        item.className = "browse-item";
+        item.type = "button";
+        item.innerHTML = `<div class="b-head">${a.headline}</div><div class="b-why">${a.why}</div>`;
+        item.onclick = () => {
+          showHome();
+          showResult(a);
+        };
+        list.appendChild(item);
+      });
     section.appendChild(list);
     browse.appendChild(section);
   });

@@ -79,6 +79,11 @@ main {
   font-weight: 800;
   margin: 0;
 }
+.browse-context {
+  font-size: 13px;
+  color: var(--gray);
+  margin: -10px 0 18px;
+}
 
 .mark {
   width: 44px;
@@ -126,6 +131,19 @@ main {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+.specific-link {
+  width: 100%;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange-dark);
+  cursor: pointer;
+  text-align: center;
 }
 .filter-line {
   display: flex;
@@ -240,11 +258,20 @@ main {
 }
 
 .section-divider {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-size: 12px;
   font-weight: 700;
   color: var(--gray);
-  margin: 22px 0 14px;
+  margin: 32px 0 22px;
+}
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
 }
 
 .option-cards {
