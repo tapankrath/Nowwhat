@@ -1,5 +1,5 @@
 const activities = [
-  { mode: "move", headline: "Go for a short walk", why: "A bit of motion outside tends to lift a flat mood fast.", mood: ["low", "ok"], energy: ["mid", "high"], time: ["20", "60"] },
+  { mode: "move", headline: "Go for a short walk", why: "A bit of motion outside tends to lift a flat mood fast.", mood: ["low", "ok"], energy: ["mid", "high"], time: ["20", "60"], nearby: "walking trail" },
   { mode: "move", headline: "Stretch for five minutes", why: "Low effort, still gets you out of your head and into your body.", mood: ["low", "ok", "good"], energy: ["low", "mid"], time: ["5", "20"] },
   { mode: "move", headline: "Put on music and dance in your kitchen", why: "Ridiculous and effective. Nobody's watching.", mood: ["low", "ok", "good"], energy: ["mid", "high"], time: ["5", "20"] },
   { mode: "rest", headline: "Take a slow shower", why: "Low energy and a short window — something restorative beats something demanding.", mood: ["low", "ok"], energy: ["low"], time: ["5", "20"] },
@@ -26,20 +26,25 @@ const activities = [
   { mode: "nourish", headline: "Get a glass of water and actually drink it", why: "Small, boring, and it works more often than it gets credit for.", mood: ["low", "ok", "good"], energy: ["low"], time: ["5"] },
   { mode: "give", headline: "Send a genuine compliment to someone", why: "Costs you nothing and it's rare enough to land.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5"] },
   { mode: "give", headline: "Leave a good review for a place you liked", why: "Two minutes, and it actually helps a small business.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5", "20"] },
-  { mode: "explore", headline: "Take a different route than usual", why: "Same walk, new scenery. Small novelty goes further than it should.", mood: ["ok", "good"], energy: ["mid", "high"], time: ["20", "60"] },
+  { mode: "explore", headline: "Take a different route than usual", why: "Same walk, new scenery. Small novelty goes further than it should.", mood: ["ok", "good"], energy: ["mid", "high"], time: ["20", "60"], nearby: "park" },
   { mode: "explore", headline: "Try a genre of music you never listen to", why: "Ten minutes of something unfamiliar resets your ear a bit.", mood: ["low", "ok", "good"], energy: ["low", "mid"], time: ["5", "20"] },
+  { mode: "local", headline: "Grab a coffee somewhere new", why: "Not your usual place — a different room does something a different drink can't.", mood: ["ok", "good"], energy: ["mid", "high"], time: ["20", "60"], nearby: "coffee shop" },
+  { mode: "local", headline: "Wander into a shop you've never been in", why: "No agenda, just browsing. Low stakes, mildly interesting.", mood: ["low", "ok", "good"], energy: ["mid", "high"], time: ["20", "60"], nearby: "shops" },
+  { mode: "local", headline: "Find a park bench and just sit outside for a bit", why: "Different air, different view. Doesn't need to be more than that.", mood: ["low", "ok"], energy: ["low", "mid"], time: ["5", "20"], nearby: "park" },
   { mode: "clear", headline: "Reply to the one email you've been avoiding", why: "It's smaller than it feels. Clearing it frees up more headspace than the task itself.", mood: ["ok", "good"], energy: ["mid"], time: ["5", "20"] },
   { mode: "clear", headline: "Pay the bill or fill the form you've been putting off", why: "Boring, quick, and it stops living rent-free in your head.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5", "20"] }
 ];
 
-const modeLabels = { move: "move", rest: "rest", connect: "connect", create: "create", play: "play", learn: "learn", reflect: "reflect", reset: "reset", focus: "focus", winddown: "wind down", process: "process", nourish: "nourish", give: "give", explore: "explore", clear: "clear", share: "share", treat: "treat", mark: "mark", gather: "gather" };
+const modeLabels = { move: "move", rest: "rest", connect: "connect", create: "create", play: "play", learn: "learn", reflect: "reflect", reset: "reset", focus: "focus", winddown: "wind down", process: "process", nourish: "nourish", give: "give", explore: "explore", clear: "clear", share: "share", treat: "treat", mark: "mark", gather: "gather", local: "local", outing: "outing" };
 
 const celebrations = [
   { mode: "share", headline: "Call the person who'll be as excited as you are", why: "Say it out loud to someone who'll match your energy.", size: ["small", "big", "huge"], company: ["one"], time: ["5", "20"] },
   { mode: "share", headline: "Post it, even just to your close friends", why: "Let it be seen. You don't have to downplay this one.", size: ["big", "huge"], company: ["everyone"], time: ["5"] },
   { mode: "share", headline: "Send a voice message instead of a text", why: "Let them hear how you actually sound right now.", size: ["small", "big"], company: ["one"], time: ["5"] },
   { mode: "treat", headline: "Buy the thing you'd normally talk yourself out of", why: "Small indulgence, deliberately, because today earned it.", size: ["big", "huge"], company: ["solo", "one"], time: ["20", "60"] },
-  { mode: "treat", headline: "Order your favorite meal, no negotiating with yourself", why: "Don't cook tonight. Let this one be easy.", size: ["small", "big", "huge"], company: ["solo", "one"], time: ["20", "60"] },
+  { mode: "treat", headline: "Order your favorite meal, no negotiating with yourself", why: "Don't cook tonight. Let this one be easy.", size: ["small", "big", "huge"], company: ["solo", "one"], time: ["20", "60"], nearby: "restaurant" },
+  { mode: "outing", headline: "Go get your favorite dessert somewhere, in person", why: "Sitting down for it beats ordering it in. Make it a small occasion.", size: ["small", "big", "huge"], company: ["solo", "one"], time: ["20", "60"], nearby: "dessert" },
+  { mode: "outing", headline: "Find a nice spot for a drink to mark it", why: "Doesn't need a plan. Just a place worth sitting in for a bit.", size: ["big", "huge"], company: ["one", "everyone"], time: ["60"], nearby: "bar" },
   { mode: "mark", headline: "Take a photo of this exact moment", why: "You'll want to remember what today felt like.", size: ["small", "big", "huge"], company: ["solo", "one", "everyone"], time: ["5"] },
   { mode: "mark", headline: "Write down what happened while it's fresh", why: "Future you will want the details, not just the headline.", size: ["big", "huge"], company: ["solo"], time: ["5", "20"] },
   { mode: "move", headline: "Put on your hype song and just let it out", why: "Physically celebrating isn't silly — it's information for your body.", size: ["small", "big", "huge"], company: ["solo"], time: ["5"] },
@@ -142,6 +147,18 @@ function showResult(pick) {
   document.getElementById("mode-tag").textContent = modeLabels[pick.mode];
   document.getElementById("headline").textContent = pick.headline;
   document.getElementById("why").textContent = pick.why;
+
+  const nearbyBtn = document.getElementById("nearby-btn");
+  if (pick.nearby) {
+    nearbyBtn.hidden = false;
+    nearbyBtn.onclick = () => {
+      const url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(pick.nearby + " near me");
+      window.open(url, "_blank");
+    };
+  } else {
+    nearbyBtn.hidden = true;
+  }
+
   const result = document.getElementById("result");
   result.hidden = false;
   document.getElementById("browse").hidden = true;
