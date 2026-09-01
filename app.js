@@ -13,10 +13,30 @@ const activities = [
   { mode: "play", headline: "Put on a song and actually listen", why: "Three minutes, no multitasking. A small reset.", mood: ["low", "ok", "good"], energy: ["low", "mid", "high"], time: ["5"] },
   { mode: "learn", headline: "Read a chapter of something", why: "High energy and real time on hand — good conditions for focus.", mood: ["ok", "good"], energy: ["high"], time: ["60"] },
   { mode: "reflect", headline: "Tidy one small corner of your space", why: "Contained and quick, with a result you'll notice right away.", mood: ["ok", "good"], energy: ["mid"], time: ["20"] },
-  { mode: "reflect", headline: "Write down three things going okay", why: "Takes two minutes and quietly shifts what you're paying attention to.", mood: ["low", "ok"], energy: ["low", "mid"], time: ["5"] }
+  { mode: "reflect", headline: "Write down three things going okay", why: "Takes two minutes and quietly shifts what you're paying attention to.", mood: ["low", "ok"], energy: ["low", "mid"], time: ["5"] },
+  { mode: "reset", headline: "Step outside for two minutes, no phone", why: "When you're wound up, changing your environment works faster than trying to think your way calm.", mood: ["low"], energy: ["mid", "high"], time: ["5"] },
+  { mode: "reset", headline: "Splash cold water on your face", why: "Blunt and physical — sometimes that's exactly what a spiked-up moment needs.", mood: ["low"], energy: ["high"], time: ["5"] },
+  { mode: "focus", headline: "Pick one small task and do just that", why: "Not the whole list — one thing, start to finish. Momentum beats a perfect plan.", mood: ["ok", "good"], energy: ["mid", "high"], time: ["20", "60"] },
+  { mode: "focus", headline: "Write down the next concrete step, nothing else", why: "You don't need the whole plan right now, just the next honest move.", mood: ["low", "ok"], energy: ["low", "mid"], time: ["5"] },
+  { mode: "winddown", headline: "Put your phone in another room and read on paper", why: "The light and the scrolling are both working against you right now.", mood: ["low", "ok"], energy: ["low"], time: ["20"] },
+  { mode: "winddown", headline: "Write down three things from today, good or bad", why: "Closes the day out instead of leaving it open in your head.", mood: ["low", "ok", "good"], energy: ["low"], time: ["5"] },
+  { mode: "process", headline: "Write out what you'd say, even if you never send it", why: "Getting it out of your head and onto a page does real work, even unsent.", mood: ["low"], energy: ["low", "mid"], time: ["20"] },
+  { mode: "process", headline: "Call the one person who'll actually get it", why: "Not everyone — just the one. That's usually enough.", mood: ["low"], energy: ["mid"], time: ["20", "60"] }
 ];
 
-const modeLabels = { move: "move", rest: "rest", connect: "connect", create: "create", play: "play", learn: "learn", reflect: "reflect" };
+const modeLabels = { move: "move", rest: "rest", connect: "connect", create: "create", play: "play", learn: "learn", reflect: "reflect", reset: "reset", focus: "focus", winddown: "wind down", process: "process" };
+
+const situations = [
+  { id: "bored", label: "Bored or restless", mode: "play", headline: "Put on a song and actually listen", why: "Three minutes, no multitasking. Small enough to just do." },
+  { id: "overwhelmed", label: "Feeling overwhelmed", mode: "reset", headline: "Step outside for two minutes, no phone", why: "Changing your environment works faster than trying to think your way calm." },
+  { id: "cantsleep", label: "Can't sleep", mode: "winddown", headline: "Put your phone in another room and read on paper", why: "The light and the scrolling are both working against you right now." },
+  { id: "anxious", label: "Anxious about something coming up", mode: "reset", headline: "Write down the next concrete step, nothing else", why: "You don't need the whole plan right now, just the next honest move." },
+  { id: "hardconvo", label: "Just had a hard conversation", mode: "process", headline: "Write out what you'd say, even if you never send it", why: "Getting it out of your head does real work, even unsent." },
+  { id: "goodnews", label: "Got good news, want to mark it", mode: "connect", headline: "Tell someone who'll be as happy as you are", why: "Good news is better shared than scrolled past." },
+  { id: "killingtime", label: "Killing time somewhere", mode: "learn", headline: "Read one thing you bookmarked and forgot about", why: "You already meant to read it. Now's as good a time as any." },
+  { id: "startday", label: "Starting the day", mode: "focus", headline: "Pick the one task that'll make today feel done", why: "Do just that first, before anything else gets a vote." },
+  { id: "endday", label: "Ending the day", mode: "winddown", headline: "Write down three things from today, good or bad", why: "Closes the day out instead of leaving it open in your head." }
+];
 
 let state = { mood: "ok", energy: "mid", time: "20" };
 let shown = [];
@@ -84,12 +104,14 @@ function suggestRandom() {
 function showHome() {
   document.getElementById("home-view").hidden = false;
   document.getElementById("browse-view").hidden = true;
+  document.getElementById("situations-view").hidden = true;
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function showBrowsePage() {
   document.getElementById("home-view").hidden = true;
   document.getElementById("browse-view").hidden = false;
+  document.getElementById("situations-view").hidden = true;
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -130,6 +152,29 @@ function renderBrowse() {
   });
 }
 
+function showSituationsPage() {
+  document.getElementById("home-view").hidden = true;
+  document.getElementById("situations-view").hidden = false;
+  document.getElementById("browse-view").hidden = true;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderSituations() {
+  const list = document.getElementById("situation-list");
+  list.innerHTML = "";
+  situations.forEach((s) => {
+    const item = document.createElement("button");
+    item.className = "situation-item";
+    item.type = "button";
+    item.textContent = s.label;
+    item.onclick = () => {
+      showHome();
+      showResult(s);
+    };
+    list.appendChild(item);
+  });
+}
+
 document.getElementById("find-btn").onclick = () => suggestFromFilters(true);
 document.getElementById("swap").onclick = () => suggestFromFilters(false);
 document.getElementById("do-it").onclick = () => {
@@ -144,5 +189,10 @@ document.getElementById("browse-card").onclick = () => {
 };
 document.getElementById("home-btn").onclick = () => showHome();
 document.getElementById("back-btn").onclick = () => showHome();
+document.getElementById("situations-card").onclick = () => {
+  renderSituations();
+  showSituationsPage();
+};
+document.getElementById("situations-back-btn").onclick = () => showHome();
 
 renderChips();

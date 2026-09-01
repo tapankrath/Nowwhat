@@ -82,7 +82,27 @@
           <small>See every idea, sorted by what it takes to do it.</small>
         </span>
       </button>
+      <button class="option-card" id="situations-card">
+        <span class="option-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        </span>
+        <span class="option-text">
+          <strong>Something specific is going on</strong>
+          <small>Skip the filters — tell us the situation.</small>
+        </span>
+      </button>
     </section>
+  </div>
+
+  <div id="situations-view" hidden>
+    <div class="browse-header">
+      <button class="back-btn" id="situations-back-btn" aria-label="Back to home">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/></svg>
+        Back
+      </button>
+      <h2>What's going on?</h2>
+    </div>
+    <div class="situation-list" id="situation-list"></div>
   </div>
 
   <div id="browse-view" hidden>
