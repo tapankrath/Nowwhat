@@ -34,7 +34,19 @@ const activities = [
   { mode: "local", headline: "Wander into a bookstore you've never been in", why: "No agenda, just browsing. Low stakes, mildly interesting.", mood: ["low", "ok", "good"], energy: ["mid", "high"], time: ["20", "60"], nearby: "bookstores" },
   { mode: "local", headline: "Find a park bench and just sit outside for a bit", why: "Different air, different view. Doesn't need to be more than that.", mood: ["low", "ok"], energy: ["low", "mid"], time: ["5", "20"], nearby: "parks" },
   { mode: "clear", headline: "Reply to the one email you've been avoiding", why: "It's smaller than it feels. Clearing it frees up more headspace than the task itself.", mood: ["ok", "good"], energy: ["mid"], time: ["5", "20"] },
-  { mode: "clear", headline: "Pay the bill or fill the form you've been putting off", why: "Boring, quick, and it stops living rent-free in your head.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5", "20"] }
+  { mode: "clear", headline: "Pay the bill or fill the form you've been putting off", why: "Boring, quick, and it stops living rent-free in your head.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5", "20"] },
+  { mode: "learn", headline: "Watch a short documentary on something random", why: "No stakes, no test after. Just let something new in.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["60"] },
+  { mode: "learn", headline: "Learn one new word and actually use it today", why: "Small and slightly silly, but it sticks better than you'd think.", mood: ["low", "ok", "good"], energy: ["low"], time: ["5"] },
+  { mode: "connect", headline: "Ask someone how they're really doing", why: "Skip the small talk version. See what they actually say.", mood: ["ok", "good"], energy: ["mid"], time: ["5", "20"] },
+  { mode: "create", headline: "Rearrange one small part of your room", why: "A different layout can make a familiar space feel new again.", mood: ["ok", "good"], energy: ["mid"], time: ["20"] },
+  { mode: "reflect", headline: "Look back at old photos for a few minutes", why: "No agenda, just a quick visit to a good memory.", mood: ["low", "ok"], energy: ["low"], time: ["5", "20"] },
+  { mode: "reset", headline: "Do ten jumping jacks, nothing fancy", why: "Blunt and physical. Sometimes your body needs to move before your mood will.", mood: ["low"], energy: ["high"], time: ["5"], physical: true },
+  { mode: "focus", headline: "Close every tab you don't actually need open", why: "A cluttered browser is a surprisingly loud kind of noise.", mood: ["ok", "good"], energy: ["mid"], time: ["5"] },
+  { mode: "winddown", headline: "Dim the lights and slow down on purpose", why: "A small environmental cue that tells your body it's okay to ease off.", mood: ["low", "ok"], energy: ["low"], time: ["20"] },
+  { mode: "process", headline: "Talk it out loud to yourself, no one has to know", why: "Hearing your own thoughts out loud changes them a little, in a good way.", mood: ["low"], energy: ["low", "mid"], time: ["5", "20"] },
+  { mode: "give", headline: "Recommend something you loved to a friend", why: "Sharing something good is its own small kind of connection.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5"] },
+  { mode: "explore", headline: "Look up something you've always wondered about", why: "Five minutes to finally close an open loop in your head.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5", "20"] },
+  { mode: "clear", headline: "Unsubscribe from five emails you never read", why: "Small cleanup, immediate and visible payoff.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5"] }
 ];
 
 const modeLabels = { move: "move", rest: "rest", connect: "connect", create: "create", play: "play", learn: "learn", reflect: "reflect", reset: "reset", focus: "focus", winddown: "wind down", process: "process", nourish: "nourish", give: "give", explore: "explore", clear: "clear", share: "share", treat: "treat", mark: "mark", gather: "gather", local: "local", outing: "outing" };
@@ -53,7 +65,11 @@ const celebrations = [
   { mode: "move", headline: "Put on your hype song and just let it out", why: "Physically celebrating isn't silly — it's information for your body.", size: ["small", "big", "huge"], company: ["solo"], time: ["5"] },
   { mode: "move", headline: "Do a genuinely embarrassing victory dance", why: "No one's grading this. Let it be ridiculous.", size: ["big", "huge"], company: ["solo", "one"], time: ["5"], physical: true },
   { mode: "gather", headline: "Get people together this week to mark it properly", why: "Big moments deserve more than a solo acknowledgment eventually.", size: ["huge"], company: ["everyone"], time: ["60"] },
-  { mode: "gather", headline: "Invite one person over or out, no big plan needed", why: "Doesn't need to be an event. Just don't be alone with this one.", size: ["big", "huge"], company: ["one"], time: ["60"] }
+  { mode: "gather", headline: "Invite one person over or out, no big plan needed", why: "Doesn't need to be an event. Just don't be alone with this one.", size: ["big", "huge"], company: ["one"], time: ["60"] },
+  { mode: "treat", headline: "Sleep in or take a real break, guilt-free", why: "The rest is part of the reward, not a delay of it.", size: ["big", "huge"], company: ["solo"], time: ["60"] },
+  { mode: "mark", headline: "Tell your future self about it — voice memo or note", why: "You'll forget the small details faster than you think. Catch them now.", size: ["small", "big", "huge"], company: ["solo"], time: ["5"] },
+  { mode: "move", headline: "Go for a victory walk, no destination", why: "Movement with nowhere to be — just letting the good mood carry you.", size: ["small", "big"], company: ["solo", "one"], time: ["20"], physical: true },
+  { mode: "gather", headline: "Plan a proper celebration for later, even just picking a date", why: "You don't have to do it all today. Just lock it in so it actually happens.", size: ["huge"], company: ["everyone"], time: ["20"] }
 ];
 
 const situations = [
@@ -204,10 +220,12 @@ function score(a) {
 }
 
 let currentMode = null;
+let currentHeadline = null;
 
 function showResult(pick) {
   shown.push(pick.headline);
   currentMode = pick.mode;
+  currentHeadline = pick.headline;
   document.getElementById("mode-tag").textContent = modeLabels[pick.mode];
   document.getElementById("headline").textContent = pick.headline;
   document.getElementById("why").textContent = pick.why;
@@ -457,8 +475,9 @@ function swapSameCategory() {
     else suggestCelebrate(false);
     return;
   }
-  const unseen = pool.filter((a) => !shown.includes(a.headline));
-  const choices = unseen.length ? unseen : pool;
+  const notCurrent = pool.filter((a) => a.headline !== currentHeadline);
+  const unseenAndNotCurrent = notCurrent.filter((a) => !shown.includes(a.headline));
+  const choices = unseenAndNotCurrent.length ? unseenAndNotCurrent : (notCurrent.length ? notCurrent : pool);
   showResult(choices[Math.floor(Math.random() * choices.length)]);
 }
 
