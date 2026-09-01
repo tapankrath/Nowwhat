@@ -1,7 +1,7 @@
 const activities = [
-  { mode: "move", headline: "Go for a short walk", why: "A bit of motion outside tends to lift a flat mood fast.", mood: ["low", "ok"], energy: ["mid", "high"], time: ["20", "60"], nearby: "walking trails" },
+  { mode: "move", headline: "Go for a short walk", why: "A bit of motion outside tends to lift a flat mood fast.", mood: ["low", "ok"], energy: ["mid", "high"], time: ["20", "60"], nearby: "walking trails", physical: true },
   { mode: "move", headline: "Stretch for five minutes", why: "Low effort, still gets you out of your head and into your body.", mood: ["low", "ok", "good"], energy: ["low", "mid"], time: ["5", "20"] },
-  { mode: "move", headline: "Put on music and dance in your kitchen", why: "Ridiculous and effective. Nobody's watching.", mood: ["low", "ok", "good"], energy: ["mid", "high"], time: ["5", "20"] },
+  { mode: "move", headline: "Put on music and dance in your kitchen", why: "Ridiculous and effective. Nobody's watching.", mood: ["low", "ok", "good"], energy: ["mid", "high"], time: ["5", "20"], physical: true },
   { mode: "rest", headline: "Take a slow shower", why: "Low energy and a short window — something restorative beats something demanding.", mood: ["low", "ok"], energy: ["low"], time: ["5", "20"] },
   { mode: "rest", headline: "Lie down for ten minutes", why: "No agenda, just a pause. Set a timer so it doesn't turn into avoidance.", mood: ["low"], energy: ["low"], time: ["5", "20"] },
   { mode: "rest", headline: "Make tea and actually sit with it", why: "Small ritual, no screen. Worth more than it sounds.", mood: ["low", "ok"], energy: ["low"], time: ["5", "20"] },
@@ -11,7 +11,7 @@ const activities = [
   { mode: "create", headline: "Doodle or journal for a few minutes", why: "No pressure to make it good, just to get something out of your head.", mood: ["low", "ok"], energy: ["low", "mid"], time: ["5", "20"] },
   { mode: "play", headline: "Watch something that makes you laugh", why: "Sometimes the point is just to enjoy something, full stop.", mood: ["low", "ok", "good"], energy: ["low", "mid"], time: ["60"] },
   { mode: "play", headline: "Put on a song and actually listen", why: "Three minutes, no multitasking. A small reset.", mood: ["low", "ok", "good"], energy: ["low", "mid", "high"], time: ["5"] },
-  { mode: "play", headline: "Catch a movie, something easy to watch", why: "Two hours where you don't have to be anywhere or decide anything else.", mood: ["low", "ok", "good"], energy: ["low", "mid"], time: ["60"], nearby: "movie theaters" },
+  { mode: "play", headline: "Catch a movie, something easy to watch", why: "Two hours where you don't have to be anywhere or decide anything else.", mood: ["low", "ok", "good"], energy: ["low", "mid"], time: ["60"], nearby: "movie theaters", tags: ["spending"] },
   { mode: "learn", headline: "Read a chapter of something", why: "High energy and real time on hand — good conditions for focus.", mood: ["ok", "good"], energy: ["high"], time: ["60"] },
   { mode: "reflect", headline: "Tidy one small corner of your space", why: "Contained and quick, with a result you'll notice right away.", mood: ["ok", "good"], energy: ["mid"], time: ["20"] },
   { mode: "reflect", headline: "Write down three things going okay", why: "Takes two minutes and quietly shifts what you're paying attention to.", mood: ["low", "ok"], energy: ["low", "mid"], time: ["5"] },
@@ -25,10 +25,10 @@ const activities = [
   { mode: "process", headline: "Call the one person who'll actually get it", why: "Not everyone — just the one. That's usually enough.", mood: ["low"], energy: ["mid"], time: ["20", "60"] },
   { mode: "nourish", headline: "Make yourself something to eat, slowly", why: "Not while doing five other things — just the food, for a few minutes.", mood: ["low", "ok"], energy: ["low", "mid"], time: ["20"] },
   { mode: "nourish", headline: "Get a glass of water and actually drink it", why: "Small, boring, and it works more often than it gets credit for.", mood: ["low", "ok", "good"], energy: ["low"], time: ["5"] },
-  { mode: "nourish", headline: "Get a proper meal somewhere, sit down for it", why: "Away from your desk, plated by someone else — different than another meal eaten standing up.", mood: ["ok", "good"], energy: ["mid"], time: ["60"], nearby: "restaurants" },
+  { mode: "nourish", headline: "Get a proper meal somewhere, sit down for it", why: "Away from your desk, plated by someone else — different than another meal eaten standing up.", mood: ["ok", "good"], energy: ["mid"], time: ["60"], nearby: "restaurants", tags: ["spending", "eating-out"] },
   { mode: "give", headline: "Send a genuine compliment to someone", why: "Costs you nothing and it's rare enough to land.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5"] },
   { mode: "give", headline: "Leave a good review for a place you liked", why: "Two minutes, and it actually helps a small business.", mood: ["ok", "good"], energy: ["low", "mid"], time: ["5", "20"] },
-  { mode: "explore", headline: "Take a different route than usual", why: "Same walk, new scenery. Small novelty goes further than it should.", mood: ["ok", "good"], energy: ["mid", "high"], time: ["20", "60"], nearby: "parks" },
+  { mode: "explore", headline: "Take a different route than usual", why: "Same walk, new scenery. Small novelty goes further than it should.", mood: ["ok", "good"], energy: ["mid", "high"], time: ["20", "60"], nearby: "parks", physical: true },
   { mode: "explore", headline: "Try a genre of music you never listen to", why: "Ten minutes of something unfamiliar resets your ear a bit.", mood: ["low", "ok", "good"], energy: ["low", "mid"], time: ["5", "20"] },
   { mode: "local", headline: "Grab a coffee somewhere new", why: "Not your usual place — a different room does something a different drink can't.", mood: ["ok", "good"], energy: ["mid", "high"], time: ["20", "60"], nearby: "coffee shops" },
   { mode: "local", headline: "Wander into a bookstore you've never been in", why: "No agenda, just browsing. Low stakes, mildly interesting.", mood: ["low", "ok", "good"], energy: ["mid", "high"], time: ["20", "60"], nearby: "bookstores" },
@@ -43,15 +43,15 @@ const celebrations = [
   { mode: "share", headline: "Call the person who'll be as excited as you are", why: "Say it out loud to someone who'll match your energy.", size: ["small", "big", "huge"], company: ["one"], time: ["5", "20"] },
   { mode: "share", headline: "Post it, even just to your close friends", why: "Let it be seen. You don't have to downplay this one.", size: ["big", "huge"], company: ["everyone"], time: ["5"] },
   { mode: "share", headline: "Send a voice message instead of a text", why: "Let them hear how you actually sound right now.", size: ["small", "big"], company: ["one"], time: ["5"] },
-  { mode: "treat", headline: "Buy the thing you'd normally talk yourself out of", why: "Small indulgence, deliberately, because today earned it.", size: ["big", "huge"], company: ["solo", "one"], time: ["20", "60"] },
-  { mode: "treat", headline: "Order your favorite meal, no negotiating with yourself", why: "Don't cook tonight. Let this one be easy.", size: ["small", "big", "huge"], company: ["solo", "one"], time: ["20", "60"], nearby: "restaurants" },
-  { mode: "outing", headline: "Go get your favorite dessert somewhere, in person", why: "Sitting down for it beats ordering it in. Make it a small occasion.", size: ["small", "big", "huge"], company: ["solo", "one"], time: ["20", "60"], nearby: "ice cream shops" },
-  { mode: "outing", headline: "Find a nice spot for a drink to mark it", why: "Doesn't need a plan. Just a place worth sitting in for a bit.", size: ["big", "huge"], company: ["one", "everyone"], time: ["60"], nearby: "bars" },
-  { mode: "outing", headline: "Catch a movie to make it a proper occasion", why: "A small event, not just another evening.", size: ["big", "huge"], company: ["one", "everyone"], time: ["60"], nearby: "movie theaters" },
+  { mode: "treat", headline: "Buy the thing you'd normally talk yourself out of", why: "Small indulgence, deliberately, because today earned it.", size: ["big", "huge"], company: ["solo", "one"], time: ["20", "60"], tags: ["spending"] },
+  { mode: "treat", headline: "Order your favorite meal, no negotiating with yourself", why: "Don't cook tonight. Let this one be easy.", size: ["small", "big", "huge"], company: ["solo", "one"], time: ["20", "60"], nearby: "restaurants", tags: ["spending", "eating-out"] },
+  { mode: "outing", headline: "Go get your favorite dessert somewhere, in person", why: "Sitting down for it beats ordering it in. Make it a small occasion.", size: ["small", "big", "huge"], company: ["solo", "one"], time: ["20", "60"], nearby: "ice cream shops", tags: ["spending", "eating-out"] },
+  { mode: "outing", headline: "Find a nice spot for a drink to mark it", why: "Doesn't need a plan. Just a place worth sitting in for a bit.", size: ["big", "huge"], company: ["one", "everyone"], time: ["60"], nearby: "bars", tags: ["alcohol", "spending"] },
+  { mode: "outing", headline: "Catch a movie to make it a proper occasion", why: "A small event, not just another evening.", size: ["big", "huge"], company: ["one", "everyone"], time: ["60"], nearby: "movie theaters", tags: ["spending"] },
   { mode: "mark", headline: "Take a photo of this exact moment", why: "You'll want to remember what today felt like.", size: ["small", "big", "huge"], company: ["solo", "one", "everyone"], time: ["5"] },
   { mode: "mark", headline: "Write down what happened while it's fresh", why: "Future you will want the details, not just the headline.", size: ["big", "huge"], company: ["solo"], time: ["5", "20"] },
   { mode: "move", headline: "Put on your hype song and just let it out", why: "Physically celebrating isn't silly — it's information for your body.", size: ["small", "big", "huge"], company: ["solo"], time: ["5"] },
-  { mode: "move", headline: "Do a genuinely embarrassing victory dance", why: "No one's grading this. Let it be ridiculous.", size: ["big", "huge"], company: ["solo", "one"], time: ["5"] },
+  { mode: "move", headline: "Do a genuinely embarrassing victory dance", why: "No one's grading this. Let it be ridiculous.", size: ["big", "huge"], company: ["solo", "one"], time: ["5"], physical: true },
   { mode: "gather", headline: "Get people together this week to mark it properly", why: "Big moments deserve more than a solo acknowledgment eventually.", size: ["huge"], company: ["everyone"], time: ["60"] },
   { mode: "gather", headline: "Invite one person over or out, no big plan needed", why: "Doesn't need to be an event. Just don't be alone with this one.", size: ["big", "huge"], company: ["one"], time: ["60"] }
 ];
@@ -76,6 +76,60 @@ const celebrateSituations = [
   { id: "niceword", label: "Someone said something nice about you", mode: "mark", headline: "Write it down somewhere you'll actually see it again", why: "Let it stick around a little longer than the moment did." }
 ];
 
+const SOCIAL_MODES = ["connect", "share", "gather", "give"];
+const SOLO_MODES = ["rest", "reflect", "winddown", "process", "focus", "clear", "nourish", "mark"];
+
+const DEFAULT_PREFS = {
+  mobility: false,
+  social: "none",
+  accessLimited: false,
+  exclude: { alcohol: false, spending: false, eatingOut: false }
+};
+
+function loadPrefs() {
+  try {
+    const raw = localStorage.getItem("psn-prefs");
+    if (!raw) return { ...DEFAULT_PREFS, exclude: { ...DEFAULT_PREFS.exclude } };
+    const parsed = JSON.parse(raw);
+    return { ...DEFAULT_PREFS, ...parsed, exclude: { ...DEFAULT_PREFS.exclude, ...(parsed.exclude || {}) } };
+  } catch (e) {
+    return { ...DEFAULT_PREFS, exclude: { ...DEFAULT_PREFS.exclude } };
+  }
+}
+
+function savePrefs() {
+  try {
+    localStorage.setItem("psn-prefs", JSON.stringify(prefs));
+  } catch (e) {
+    // storage unavailable, prefs just won't persist across sessions
+  }
+}
+
+let prefs = loadPrefs();
+
+function passesHardFilters(a) {
+  if (prefs.mobility && a.physical) return false;
+  if (a.tags) {
+    if (prefs.exclude.alcohol && a.tags.includes("alcohol")) return false;
+    if (prefs.exclude.spending && a.tags.includes("spending")) return false;
+    if (prefs.exclude.eatingOut && a.tags.includes("eating-out")) return false;
+  }
+  return true;
+}
+
+function prefAdjustment(a) {
+  let adj = 0;
+  if (prefs.social === "solo") {
+    if (SOCIAL_MODES.includes(a.mode)) adj -= 2;
+    if (SOLO_MODES.includes(a.mode)) adj += 1;
+  } else if (prefs.social === "social") {
+    if (SOCIAL_MODES.includes(a.mode)) adj += 2;
+    if (SOLO_MODES.includes(a.mode)) adj -= 1;
+  }
+  if (prefs.accessLimited && a.nearby) adj -= 4;
+  return adj;
+}
+
 let appMode = "lift";
 let state = { mood: "ok", energy: "mid", time: "20" };
 let cstate = { size: "big", company: "one", time: "20" };
@@ -86,7 +140,7 @@ function matchScoreCelebrate(a) {
   if (a.size.includes(cstate.size)) s += 2;
   if (a.company.includes(cstate.company)) s += 2;
   if (a.time.includes(cstate.time)) s += 2;
-  return s;
+  return s + prefAdjustment(a);
 }
 
 function scoreCelebrate(a) {
@@ -140,7 +194,7 @@ function matchScore(a) {
   if (a.mood.includes(state.mood)) s += 2;
   if (a.energy.includes(state.energy)) s += 2;
   if (a.time.includes(state.time)) s += 2;
-  return s;
+  return s + prefAdjustment(a);
 }
 
 function score(a) {
@@ -179,7 +233,8 @@ function showResult(pick) {
 
 function suggestFromFilters(reset) {
   if (reset) shown = [];
-  const scored = activities.map((a) => ({ a, s: score(a) }));
+  const pool = activities.filter(passesHardFilters);
+  const scored = pool.map((a) => ({ a, s: score(a) }));
   const max = Math.max(...scored.map((x) => x.s));
   const top = scored.filter((x) => x.s === max).map((x) => x.a);
   showResult(top[Math.floor(Math.random() * top.length)]);
@@ -187,14 +242,15 @@ function suggestFromFilters(reset) {
 
 function suggestCelebrate(reset) {
   if (reset) shown = [];
-  const scored = celebrations.map((a) => ({ a, s: scoreCelebrate(a) }));
+  const pool = celebrations.filter(passesHardFilters);
+  const scored = pool.map((a) => ({ a, s: scoreCelebrate(a) }));
   const max = Math.max(...scored.map((x) => x.s));
   const top = scored.filter((x) => x.s === max).map((x) => x.a);
   showResult(top[Math.floor(Math.random() * top.length)]);
 }
 
 function suggestRandom() {
-  const pool = appMode === "lift" ? activities : celebrations;
+  const pool = (appMode === "lift" ? activities : celebrations).filter(passesHardFilters);
   const pick = pool[Math.floor(Math.random() * pool.length)];
   showResult(pick);
 }
@@ -203,6 +259,7 @@ function showHome() {
   document.getElementById("home-view").hidden = false;
   document.getElementById("browse-view").hidden = true;
   document.getElementById("situations-view").hidden = true;
+  document.getElementById("settings-view").hidden = true;
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -210,6 +267,16 @@ function showBrowsePage() {
   document.getElementById("home-view").hidden = true;
   document.getElementById("browse-view").hidden = false;
   document.getElementById("situations-view").hidden = true;
+  document.getElementById("settings-view").hidden = true;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function showSettingsPage() {
+  document.getElementById("home-view").hidden = true;
+  document.getElementById("browse-view").hidden = true;
+  document.getElementById("situations-view").hidden = true;
+  document.getElementById("settings-view").hidden = false;
+  renderSettings();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -218,7 +285,7 @@ function renderBrowseGeneric(dataset, matchFn) {
   browse.innerHTML = "";
 
   const groups = {};
-  dataset.forEach((a) => {
+  dataset.filter(passesHardFilters).forEach((a) => {
     if (!groups[a.mode]) groups[a.mode] = [];
     groups[a.mode].push(a);
   });
@@ -270,6 +337,7 @@ function showSituationsPage() {
   document.getElementById("home-view").hidden = true;
   document.getElementById("situations-view").hidden = false;
   document.getElementById("browse-view").hidden = true;
+  document.getElementById("settings-view").hidden = true;
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -329,6 +397,48 @@ function switchMode(mode) {
   renderChips();
 }
 
+function renderSettings() {
+  const mobility = document.getElementById("pref-mobility");
+  const access = document.getElementById("pref-access");
+  const alcohol = document.getElementById("pref-exclude-alcohol");
+  const spending = document.getElementById("pref-exclude-spending");
+  const eatingOut = document.getElementById("pref-exclude-eatingout");
+  const socialRow = document.getElementById("pref-social-row");
+  if (!mobility || !access || !alcohol || !spending || !eatingOut || !socialRow) return;
+
+  mobility.checked = prefs.mobility;
+  access.checked = prefs.accessLimited;
+  alcohol.checked = prefs.exclude.alcohol;
+  spending.checked = prefs.exclude.spending;
+  eatingOut.checked = prefs.exclude.eatingOut;
+
+  Array.from(socialRow.children).forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.value === prefs.social);
+  });
+}
+
+function onChange(id, fn) {
+  const el = document.getElementById(id);
+  if (el) el.onchange = fn;
+}
+
+onChange("pref-mobility", (e) => { prefs.mobility = e.target.checked; savePrefs(); });
+onChange("pref-access", (e) => { prefs.accessLimited = e.target.checked; savePrefs(); });
+onChange("pref-exclude-alcohol", (e) => { prefs.exclude.alcohol = e.target.checked; savePrefs(); });
+onChange("pref-exclude-spending", (e) => { prefs.exclude.spending = e.target.checked; savePrefs(); });
+onChange("pref-exclude-eatingout", (e) => { prefs.exclude.eatingOut = e.target.checked; savePrefs(); });
+
+const socialRowEl = document.getElementById("pref-social-row");
+if (socialRowEl) {
+  Array.from(socialRowEl.children).forEach((btn) => {
+    btn.onclick = () => {
+      prefs.social = btn.dataset.value;
+      savePrefs();
+      renderSettings();
+    };
+  });
+}
+
 function on(id, fn) {
   const el = document.getElementById(id);
   if (el) el.onclick = fn;
@@ -341,7 +451,7 @@ on("find-btn", () => {
   else suggestCelebrate(true);
 });
 function swapSameCategory() {
-  const pool = (appMode === "lift" ? activities : celebrations).filter((a) => a.mode === currentMode);
+  const pool = (appMode === "lift" ? activities : celebrations).filter((a) => a.mode === currentMode && passesHardFilters(a));
   if (pool.length === 0) {
     if (appMode === "lift") suggestFromFilters(false);
     else suggestCelebrate(false);
@@ -373,6 +483,8 @@ on("situations-card", () => {
 on("situations-back-btn", () => showHome());
 on("mode-lift-tab", () => switchMode("lift"));
 on("mode-celebrate-tab", () => switchMode("celebrate"));
+on("settings-btn", () => showSettingsPage());
+on("settings-back-btn", () => showHome());
 on("pick-for-me-btn", () => {
   const cards = document.getElementById("option-cards");
   if (!cards) return;
