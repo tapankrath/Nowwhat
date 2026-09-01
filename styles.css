@@ -106,7 +106,7 @@ main {
   color: var(--gray);
 }
 
-.hero { padding: 20px 0 8px; }
+.hero { padding: 6px 0 8px; }
 .hero h1 {
   font-size: 32px;
   line-height: 1.15;
@@ -125,7 +125,7 @@ main {
 .mode-toggle {
   display: flex;
   gap: 10px;
-  margin-bottom: 22px;
+  margin: 16px 0 22px;
 }
 .mode-tab {
   flex: 1;
