@@ -28,15 +28,21 @@
 
 <main>
   <div id="home-view">
+    <div class="mode-toggle" role="tablist" aria-label="What kind of moment is this">
+      <button class="mode-tab active" id="mode-lift-tab" type="button">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 2a1 1 0 0 1 1 1v1.06a8 8 0 0 1 6.94 6.94H21a1 1 0 1 1 0 2h-1.06A8 8 0 0 1 13 19.94V21a1 1 0 1 1-2 0v-1.06A8 8 0 0 1 4.06 13H3a1 1 0 1 1 0-2h1.06A8 8 0 0 1 11 4.06V3a1 1 0 0 1 1-1zm0 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>
+        Need a lift
+      </button>
+      <button class="mode-tab" id="mode-celebrate-tab" type="button">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4 11-4 4-4-4 4-4z"/></svg>
+        Feeling great
+      </button>
+    </div>
+
     <section class="hero">
       <h1 id="hero-h1">Low, restless, no idea? <span class="accent-green">Shift it, quick.</span></h1>
       <p class="lede" id="hero-lede">Tell us how you're feeling and how much time you've got — we'll hand you one thing to do. Not ten. One.</p>
     </section>
-
-    <div class="mode-toggle" role="tablist" aria-label="What kind of moment is this">
-      <button class="mode-tab active" id="mode-lift-tab" type="button">Need a lift</button>
-      <button class="mode-tab" id="mode-celebrate-tab" type="button">Feeling great</button>
-    </div>
 
     <section class="filters" aria-label="Tell us more">
       <div class="filter-line">
