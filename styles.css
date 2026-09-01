@@ -162,12 +162,15 @@ main {
 }
 .specific-link {
   width: 100%;
-  background: none;
-  border: none;
-  border-top: 1px solid var(--line);
-  padding-top: 16px;
-  margin-top: 2px;
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 90, 31, 0.08);
+  border: 1.5px solid rgba(255, 90, 31, 0.25);
+  border-radius: 14px;
+  padding: 14px 12px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--orange-dark);
   cursor: pointer;
