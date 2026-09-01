@@ -354,5 +354,11 @@ document.getElementById("situations-card").onclick = () => {
 document.getElementById("situations-back-btn").onclick = () => showHome();
 document.getElementById("mode-lift-tab").onclick = () => switchMode("lift");
 document.getElementById("mode-celebrate-tab").onclick = () => switchMode("celebrate");
+document.getElementById("pick-for-me-btn").onclick = () => {
+  const cards = document.getElementById("option-cards");
+  cards.scrollIntoView({ behavior: "smooth", block: "center" });
+  cards.classList.add("pulse");
+  setTimeout(() => cards.classList.remove("pulse"), 900);
+};
 
 renderChips();

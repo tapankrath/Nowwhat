@@ -59,10 +59,15 @@
       </div>
     </section>
 
-    <button class="cta" id="find-btn">
-      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M13 3a1 1 0 0 1 1 1v6h6a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-6v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-6H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h6V4a1 1 0 0 1 1-1z"/></svg>
-      <span id="find-btn-label">Find something to do</span>
-    </button>
+    <div class="cta-row">
+      <button class="cta" id="find-btn">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M13 3a1 1 0 0 1 1 1v6h6a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-6v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-6H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h6V4a1 1 0 0 1 1-1z"/></svg>
+        <span id="find-btn-label">Find something to do</span>
+      </button>
+      <button class="cta-secondary" id="pick-for-me-btn">
+        Or, let<br>us pick
+      </button>
+    </div>
 
     <section class="result" id="result" hidden>
       <span class="mode-tag" id="mode-tag">rest</span>
@@ -80,9 +85,7 @@
       </div>
     </section>
 
-    <p class="section-divider">Or, let us pick</p>
-
-    <section class="option-cards">
+    <section class="option-cards" id="option-cards">
       <button class="option-card" id="surprise-card">
         <span class="option-icon">
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2a1 1 0 0 1 1 1v1.06a8 8 0 0 1 6.94 6.94H21a1 1 0 1 1 0 2h-1.06A8 8 0 0 1 13 19.94V21a1 1 0 1 1-2 0v-1.06A8 8 0 0 1 4.06 13H3a1 1 0 1 1 0-2h1.06A8 8 0 0 1 11 4.06V3a1 1 0 0 1 1-1zm0 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>
