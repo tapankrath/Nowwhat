@@ -149,8 +149,11 @@ function score(a) {
   return s;
 }
 
+let currentMode = null;
+
 function showResult(pick) {
   shown.push(pick.headline);
+  currentMode = pick.mode;
   document.getElementById("mode-tag").textContent = modeLabels[pick.mode];
   document.getElementById("headline").textContent = pick.headline;
   document.getElementById("why").textContent = pick.why;
@@ -337,10 +340,19 @@ on("find-btn", () => {
   if (appMode === "lift") suggestFromFilters(true);
   else suggestCelebrate(true);
 });
-on("swap", () => {
-  if (appMode === "lift") suggestFromFilters(false);
-  else suggestCelebrate(false);
-});
+function swapSameCategory() {
+  const pool = (appMode === "lift" ? activities : celebrations).filter((a) => a.mode === currentMode);
+  if (pool.length === 0) {
+    if (appMode === "lift") suggestFromFilters(false);
+    else suggestCelebrate(false);
+    return;
+  }
+  const unseen = pool.filter((a) => !shown.includes(a.headline));
+  const choices = unseen.length ? unseen : pool;
+  showResult(choices[Math.floor(Math.random() * choices.length)]);
+}
+
+on("swap", () => swapSameCategory());
 on("do-it", () => {
   const btn = document.getElementById("do-it");
   btn.textContent = "Nice.";
