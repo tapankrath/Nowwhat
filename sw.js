@@ -1,4 +1,4 @@
-const CACHE = "picksomethingnow-v10";
+const CACHE = "picksomethingnow-v11";
 const FILES = [
   "./",
   "./index.html",

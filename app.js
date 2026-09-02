@@ -221,11 +221,13 @@ function score(a) {
 
 let currentMode = null;
 let currentHeadline = null;
+let currentSource = "engine";
 
-function showResult(pick) {
+function showResult(pick, source) {
   shown.push(pick.headline);
   currentMode = pick.mode;
   currentHeadline = pick.headline;
+  currentSource = source || "engine";
   document.getElementById("mode-tag").textContent = modeLabels[pick.mode];
   document.getElementById("headline").textContent = pick.headline;
   document.getElementById("why").textContent = pick.why;
@@ -255,7 +257,7 @@ function suggestFromFilters(reset) {
   const scored = pool.map((a) => ({ a, s: score(a) }));
   const max = Math.max(...scored.map((x) => x.s));
   const top = scored.filter((x) => x.s === max).map((x) => x.a);
-  showResult(top[Math.floor(Math.random() * top.length)]);
+  showResult(top[Math.floor(Math.random() * top.length)], "engine");
 }
 
 function suggestCelebrate(reset) {
@@ -264,13 +266,13 @@ function suggestCelebrate(reset) {
   const scored = pool.map((a) => ({ a, s: scoreCelebrate(a) }));
   const max = Math.max(...scored.map((x) => x.s));
   const top = scored.filter((x) => x.s === max).map((x) => x.a);
-  showResult(top[Math.floor(Math.random() * top.length)]);
+  showResult(top[Math.floor(Math.random() * top.length)], "engine");
 }
 
 function suggestRandom() {
   const pool = (appMode === "lift" ? activities : celebrations).filter(passesHardFilters);
   const pick = pool[Math.floor(Math.random() * pool.length)];
-  showResult(pick);
+  showResult(pick, "random");
 }
 
 function showHome() {
@@ -334,7 +336,7 @@ function renderBrowseGeneric(dataset, matchFn) {
         item.innerHTML = `<div class="b-head">${a.headline}</div><div class="b-why">${a.why}</div>`;
         item.onclick = () => {
           showHome();
-          showResult(a);
+          showResult(a, "engine");
         };
         list.appendChild(item);
       });
@@ -370,7 +372,7 @@ function renderSituations() {
     item.textContent = s.label;
     item.onclick = () => {
       showHome();
-      showResult(s);
+      showResult(s, "situation");
     };
     list.appendChild(item);
   });
@@ -468,20 +470,45 @@ on("find-btn", () => {
   if (appMode === "lift") suggestFromFilters(true);
   else suggestCelebrate(true);
 });
-function swapSameCategory() {
-  const pool = (appMode === "lift" ? activities : celebrations).filter((a) => a.mode === currentMode && passesHardFilters(a));
-  if (pool.length === 0) {
-    if (appMode === "lift") suggestFromFilters(false);
-    else suggestCelebrate(false);
-    return;
-  }
+function pickFrom(pool) {
   const notCurrent = pool.filter((a) => a.headline !== currentHeadline);
   const unseenAndNotCurrent = notCurrent.filter((a) => !shown.includes(a.headline));
   const choices = unseenAndNotCurrent.length ? unseenAndNotCurrent : (notCurrent.length ? notCurrent : pool);
-  showResult(choices[Math.floor(Math.random() * choices.length)]);
+  return choices[Math.floor(Math.random() * choices.length)];
 }
 
-on("swap", () => swapSameCategory());
+function swapResult() {
+  const dataset = (appMode === "lift" ? activities : celebrations).filter(passesHardFilters);
+
+  if (currentSource === "situation") {
+    const pool = dataset.filter((a) => a.mode === currentMode);
+    if (pool.length === 0) {
+      if (appMode === "lift") suggestFromFilters(false);
+      else suggestCelebrate(false);
+      return;
+    }
+    showResult(pickFrom(pool), "situation");
+    return;
+  }
+
+  if (currentSource === "random") {
+    if (dataset.length === 0) return;
+    showResult(pickFrom(dataset), "random");
+    return;
+  }
+
+  // "engine" source: broad pool of near-best matches for the current mood/energy/time
+  // (or size/company/time) state, spanning every category — not just the one the
+  // current suggestion happened to land in.
+  const scoreFn = appMode === "lift" ? matchScore : matchScoreCelebrate;
+  const scored = dataset.map((a) => ({ a, s: scoreFn(a) }));
+  const max = Math.max(...scored.map((x) => x.s));
+  const near = scored.filter((x) => x.s >= max - 2).map((x) => x.a);
+  const pool = near.length ? near : dataset;
+  showResult(pickFrom(pool), "engine");
+}
+
+on("swap", () => swapResult());
 on("do-it", () => {
   const btn = document.getElementById("do-it");
   btn.textContent = "Nice.";
