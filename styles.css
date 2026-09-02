@@ -201,8 +201,9 @@ main {
   font-size: 17px;
   font-weight: 800;
   letter-spacing: -0.3px;
+  color: var(--ink);
 }
-.wordmark .name em { font-style: normal; color: var(--orange); }
+.wordmark .name em { font-style: normal; color: var(--orange); font-weight: 800; }
 .wordmark .tag {
   font-size: 10px;
   font-weight: 600;
